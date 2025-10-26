@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Becklan V2 Field App</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-192.png">
+<meta name="theme-color" content="#0a7">
+<style>
+  body{font-family:system-ui,Segoe UI,Roboto,Arial;background:#f6f8fb;margin:0;padding:16px}
+  header{display:flex;align-items:center;gap:12px}
+  header img{width:44px;height:44px;border-radius:10px}
+  h1{font-size:18px;margin:4px 0}
+  .muted{color:#667085;font-size:12px}
+  .card{background:#fff;border-radius:14px;padding:14px;margin:12px 0;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+  input,select,textarea,button{width:100%;padding:10px;border:1px solid #d9dee3;border-radius:10px;font-size:14px}
+  button{background:#0a7;color:#fff;border:none;font-weight:600;cursor:pointer}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .results{list-style:none;padding:0;margin:8px 0}
+  .results li{padding:6px 2px;border-bottom:1px dashed #e3e8ef}
+  #status.ok{color:#087443} #status.err{color:#b42318}
+  footer{margin-top:16px;text-align:center;color:#98a2b3;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <img src="assets/icon-192.png" alt="Becklan">
+  <div>
+    <h1>Becklan V2 – Field App</h1>
+    <div class="muted">Search • Sales • Purchases • Services</div>
+  </div>
+</header>
+
+<div class="card">
+  <label>API Base URL (Apps Script Web App)</label>
+  <input id="baseUrl" value="https://script.google.com/macros/s/AKfycbzVRWHJ7ApOyrEzPOb51k66eF7e0u4ZvD6RXXiW2Wl4ceHyKmcB0zSvJ2GU5BuxQVzD/exec" placeholder="https://script.google.com/macros/s/AKfycbzVRWHJ7ApOyrEzPOb51k66eF7e0u4ZvD6RXXiW2Wl4ceHyKmcB0zSvJ2GU5BuxQVzD/exec">
+  <small class="muted">Pre-filled for Becklan V2. You can change it if needed.</small>
+</div>
+
+<div class="card">
+  <label>Search medication</label>
+  <input id="q" placeholder="e.g., paracetamol 500">
+  <button id="btnSearch">Search</button>
+  <ul id="results" class="results"></ul>
+</div>
+
+<div class="card">
+  <label>Record</label>
+  <select id="type">
+    <option value="sale">Sale</option>
+    <option value="purchase">Purchase</option>
+    <option value="service">Service</option>
+  </select>
+
+  <div id="formSale">
+    <div class="row">
+      <input id="saleProduct" placeholder="Product">
+      <input id="saleQty" type="number" placeholder="Qty">
+    </div>
+    <div class="row">
+      <input id="salePrice" type="number" placeholder="Price (Le)">
+      <input id="saleStaff" placeholder="Staff">
+    </div>
+    <button id="btnSale">Submit Sale</button>
+  </div>
+
+  <div id="formPurchase" style="display:none">
+    <div class="row">
+      <input id="purProduct" placeholder="Product">
+      <input id="purQty" type="number" placeholder="Qty">
+    </div>
+    <div class="row">
+      <input id="purCost" type="number" placeholder="Cost (Le)">
+      <input id="purSupplier" placeholder="Supplier">
+    </div>
+    <button id="btnPurchase">Submit Purchase</button>
+  </div>
+
+  <div id="formService" style="display:none">
+    <div class="row">
+      <input id="svcPatient" placeholder="Patient">
+      <input id="svcFee" type="number" placeholder="Fee (Le)">
+    </div>
+    <div class="row">
+      <input id="svcDiagnosis" placeholder="Diagnosis">
+      <input id="svcStaff" placeholder="Staff">
+    </div>
+    <input id="svcType" placeholder="Service Performed (e.g., Dressing, Injection)">
+    <textarea id="svcMedication" placeholder="Medication & dosage"></textarea>
+    <button id="btnService">Submit Service</button>
+  </div>
+
+  <div id="status" class="muted"></div>
+</div>
+
+<footer>© Becklan Drugstore • Wellbodi Foundation</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
